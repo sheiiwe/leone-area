@@ -1,0 +1,4 @@
+[functions.point-confirmation]
+# Internal cron only. The handler verifies x-point-token against a server-only
+# random token before claiming a message; anonymous JWTs do not authorize it.
+verify_jwt = false

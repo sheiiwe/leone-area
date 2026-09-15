@@ -22,7 +22,7 @@ function detail(s){
  button.disabled=true;button.textContent='Invio in corso…';result.textContent='';
  const payload=Object.fromEntries(['ragione_sociale','referente','email','telefono','partita_iva','citta','messaggio'].map(k=>[k,String(f.get(k)||'').trim()]));Object.assign(payload,{servizio_id:s.id,consenso:f.get('consenso')==='on',privacy_version:'point-2026-09-15-v1'});
  try{const{error}=await db.from('point_richieste').insert(payload);if(error)throw error;
- document.querySelector('#contact-panel').innerHTML='<div class="eyebrow">Richiesta ricevuta</div><h2>Grazie, '+esc(payload.referente)+'.</h2><p>La tua richiesta per <strong>'+esc(s.titolo)+'</strong> è stata ricevuta da Leone Consulting.</p><p>Avvieremo la segnalazione al partner '+esc(s.partner)+' tramite Conflavoro Point, per il ricontatto ai recapiti che hai indicato.</p><a class="button" href="/conflavoro/">Torna ai servizi</a>';
+ document.querySelector('#contact-panel').innerHTML='<div class="eyebrow">Richiesta ricevuta</div><h2>Grazie, '+esc(payload.referente)+'.</h2><p>La tua richiesta per <strong>'+esc(s.titolo)+'</strong> è stata ricevuta da Leone Consulting.</p><p>Avvieremo la segnalazione al partner '+esc(s.partner)+' tramite Conflavoro Point, per il ricontatto ai recapiti che hai indicato.</p><p>Riceverai un’email di conferma all’indirizzo indicato. Se non la trovi, controlla anche la posta indesiderata.</p><a class="button" href="/conflavoro/">Torna ai servizi</a>';
  }catch{result.className='notice error';result.textContent='La richiesta non è stata inviata. Controlla i dati e riprova.';button.disabled=false;button.textContent='Richiedi il contatto →'}};
 }
 init();
