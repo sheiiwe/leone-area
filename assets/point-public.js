@@ -1,4 +1,4 @@
-import{detailIntro,detailFaq}from'./point-details.js?v=20260916-rich';
+import{detailIntro,detailFaq}from'./point-details.js?v=20260916-original';
 import{db,esc,footer}from'./point-shared.js';
 const app=document.querySelector('#app');
 document.body.insertAdjacentHTML('beforeend',footer());
