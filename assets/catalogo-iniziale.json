@@ -69,7 +69,7 @@
     "descrizione": "Assistenza sanitaria integrativa attraverso il fondo, secondo le condizioni di adesione.",
     "requisiti": "Il servizio può richiedere adesione, iscrizione o specifici requisiti. Il partner ne verifica l'applicabilità alla richiesta.",
     "fonte_url": "https://point.conflavoro.it/partners/6",
-    "attivo": true,
+    "attivo": false,
     "da_verificare": false,
     "ordinamento": 4,
     "verificato_il": "2026-09-15"
@@ -84,7 +84,7 @@
     "descrizione": "Opportunità di formazione dei dipendenti attraverso il fondo interprofessionale.",
     "requisiti": "Il servizio può richiedere adesione, iscrizione o specifici requisiti. Il partner ne verifica l'applicabilità alla richiesta.",
     "fonte_url": "https://point.conflavoro.it/partners/50",
-    "attivo": true,
+    "attivo": false,
     "da_verificare": false,
     "ordinamento": 5,
     "verificato_il": "2026-09-15"
@@ -1224,7 +1224,7 @@
     "descrizione": "Servizi finanziati attraverso l'Avviso Abila per le imprese iscritte a EBIASP.",
     "requisiti": "L'accesso dipende dall'iscrizione, dalla contribuzione e dalle condizioni dell'Avviso. Il partner verifica i requisiti e l'eventuale accreditamento del soggetto attuatore.",
     "fonte_url": "https://point.conflavoro.it/partners/29",
-    "attivo": true,
+    "attivo": false,
     "da_verificare": false,
     "ordinamento": 8,
     "verificato_il": "2026-09-15"

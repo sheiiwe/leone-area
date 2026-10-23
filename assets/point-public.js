@@ -1,4 +1,4 @@
-import{detailIntro,detailFaq}from'./point-details.js?v=20260916-original';
+import{detailIntro,detailFaq}from'./point-details.js?v=20261023-point';
 import{db,esc,footer}from'./point-shared.js';
 const app=document.querySelector('#app');
 document.body.insertAdjacentHTML('beforeend',footer());
@@ -12,7 +12,7 @@ async function init(){
 }
 function catalogue(){
  app.innerHTML='<section class="hero"><div class="eyebrow">Un punto di accesso, tante opportunità</div><h1>Servizi e convenzioni<br>per la tua impresa.</h1><p class="muted">Scegli il servizio che ti interessa. Leone Consulting, Conflavoro Point, raccoglie la tua richiesta e avvia la segnalazione al partner, che ti ricontatterà.</p></section><div class="tools"><input id="q" type="search" placeholder="Cerca un servizio o un partner" aria-label="Cerca un servizio"><select id="cat" aria-label="Categoria"><option value="">Tutte le categorie</option>'+[...new Set(services.map(s=>s.categoria))].sort().map(c=>'<option>'+esc(c)+'</option>').join('')+'</select></div><p id="count" class="muted" aria-live="polite"></p><div id="cards" class="cards"></div>';
- const render=()=>{const q=document.querySelector('#q').value.toLocaleLowerCase('it'),cat=document.querySelector('#cat').value;const rows=services.filter(s=>(!cat||s.categoria===cat)&&(s.titolo+' '+s.partner+' '+s.descrizione).toLocaleLowerCase('it').includes(q));document.querySelector('#count').textContent=rows.length+' servizi e convenzioni';document.querySelector('#cards').innerHTML=rows.length?rows.map(s=>'<article class="service"><span class="tag">'+esc(s.categoria)+'</span><h3>'+esc(s.titolo)+'</h3><div class="partner">'+esc(s.partner)+'</div><p class="desc">'+esc(s.descrizione)+'</p><a class="link" href="?servizio='+encodeURIComponent(s.slug)+'">Scopri e richiedi il contatto ↗</a></article>').join(''):'<p>Nessun servizio corrisponde alla ricerca.</p>'};
+ const render=()=>{const q=document.querySelector('#q').value.toLocaleLowerCase('it'),cat=document.querySelector('#cat').value;const rows=services.filter(s=>(!cat||s.categoria===cat)&&(s.titolo+' '+s.partner+' '+s.descrizione).toLocaleLowerCase('it').includes(q));document.querySelector('#count').textContent=rows.length+' servizi e convenzioni';document.querySelector('#cards').innerHTML=rows.length?rows.map(s=>'<a class="service" href="?servizio='+encodeURIComponent(s.slug)+'" aria-label="'+esc(s.titolo+' · '+s.partner)+'"><span class="tag">'+esc(s.categoria)+'</span><h3>'+esc(s.titolo)+'</h3><div class="partner">'+esc(s.partner)+'</div><p class="desc">'+esc(s.descrizione)+'</p><span class="link" aria-hidden="true">Scopri e richiedi il contatto ↗</span></a>').join(''):'<p>Nessun servizio corrisponde alla ricerca.</p>'};
  document.querySelector('#q').oninput=render;document.querySelector('#cat').onchange=render;render();
 }
 function detail(s){

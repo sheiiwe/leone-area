@@ -1,28 +1,13 @@
 import {esc} from './point-shared.js';
+import {serviceContent} from './point-content.js?v=20261023-point';
 
-// Editorial presentation based on the partner's visible Point page (16/09/2026).
-// No membership download, direct application or automatic partner referral.
-const membership = {
- subtitle:'Una rete al fianco delle piccole e medie imprese.',
- introTitle:'Rappresentanza, servizi e opportunità per la tua impresa',
- paragraphs:[
-  'Conflavoro rappresenta le piccole e medie imprese e affianca gli imprenditori nelle esigenze legate al lavoro e allo sviluppo dell’attività. Il tesseramento permette di entrare nella rete associativa e conoscere i servizi e le opportunità dedicati alle aziende aderenti.',
-  'Tra gli ambiti presentati dall’associazione rientrano la contrattazione collettiva, l’assistenza sindacale datoriale, la formazione e il supporto alle imprese. Il contatto con Conflavoro consente di approfondire quali strumenti siano adatti alla propria attività.'
- ],
- benefits:[
-  {title:'Supporto alle scelte aziendali',text:'Orientamento sulle esigenze dell’impresa, sull’accesso al credito e sulla finanza agevolata, con attenzione alla gestione dei costi e alle convenzioni disponibili.'},
-  {title:'Formazione e crescita professionale',text:'Percorsi formativi, anche obbligatori, e opportunità legate alla sicurezza e alle certificazioni, da individuare in base al settore e alle necessità dell’azienda.'},
-  {title:'Assistenza legale e sindacale',text:'Affiancamento nei rapporti di lavoro e nelle questioni sindacali datoriali, con aggiornamenti e supporto nella gestione delle esigenze aziendali.'}
- ],
- conditions:'Quote associative, modalità di adesione e condizioni dei singoli servizi saranno approfondite con Conflavoro. La richiesta di ricontatto non attiva il tesseramento e non comporta l’acquisto di un servizio.'
-};
-function callout(){return '<div class="partner-callout"><span class="contact-dot" aria-hidden="true"></span><strong>Verrete ricontattati dal partner</strong></div>'}
 export function detailIntro(s){
- const m=s.id==='p1'?membership:null;
- const subtitle=m?.subtitle||s.descrizione;
- let result='<a class="back" href="/conflavoro/">← Tutti i servizi e le convenzioni</a><section class="detail-hero '+(m?'membership-hero':'')+'"><div class="detail-hero-content"><div class="eyebrow">'+esc(s.categoria)+'</div><h1>'+esc(s.titolo)+'</h1><p class="detail-subtitle">'+esc(subtitle)+'</p><p class="detail-partner">'+(s.partner==='Conflavoro'?'Conflavoro · Associazione di categoria':'Partner della rete Conflavoro · '+esc(s.partner))+'</p><a class="button" href="#richiedi-contatto">Richiedi di essere ricontattato →</a></div></section>'+callout(s);
- if(m){
-  result+='<section class="detail-intro"><div><div class="eyebrow">Il tesseramento</div><h2>'+esc(m.introTitle)+'</h2>'+m.paragraphs.map(p=>'<p>'+esc(p)+'</p>').join('')+'</div></section><section class="benefits-section"><div class="eyebrow">Gli ambiti di supporto</div><h2>Cosa puoi approfondire con Conflavoro</h2><div class="benefit-grid">'+m.benefits.map((b,i)=>'<article class="benefit-card"><span class="benefit-number" aria-hidden="true">0'+(i+1)+'</span><h3>'+esc(b.title)+'</h3><p>'+esc(b.text)+'</p></article>').join('')+'</div><p class="detail-conditions">'+esc(m.conditions)+'</p></section>';
+ const content=serviceContent[s.id];
+ const subtitle=s.id==='p1'?'Una rete al fianco delle piccole e medie imprese.':s.descrizione;
+ let result='<a class="back" href="/conflavoro/">← Tutti i servizi e le convenzioni</a><section class="detail-hero '+(s.id==='p1'?'membership-hero':'')+'"><div class="detail-hero-content"><div class="eyebrow">'+esc(s.categoria)+'</div><h1>'+esc(s.titolo)+'</h1><p class="detail-subtitle">'+esc(subtitle)+'</p><p class="detail-partner">'+(s.partner==='Conflavoro'?'Conflavoro · Associazione di categoria':'Partner della rete Conflavoro · '+esc(s.partner))+'</p><a class="button" href="#richiedi-contatto">Richiedi di essere ricontattato →</a></div></section><div class="partner-callout"><span class="contact-dot" aria-hidden="true"></span><strong>Verrete ricontattati dal partner</strong></div>';
+ if(content){
+  result+='<section class="detail-intro"><div class="eyebrow">'+(s.id==='p1'?'Il tesseramento':'Il servizio')+'</div><h2>'+esc(content.title)+'</h2><p>'+esc(content.intro)+'</p><h3>A chi si rivolge</h3><p>'+esc(content.audience)+'</p></section>';
+  result+='<section class="benefits-section"><div class="eyebrow">La proposta del partner</div><h2>Cosa puoi approfondire</h2><div class="benefit-grid">'+content.points.map(([title,text],i)=>'<article class="benefit-card"><span class="benefit-number" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span><h3>'+esc(title)+'</h3><p>'+esc(text)+'</p></article>').join('')+'</div><div class="service-preparation"><h3>Per il primo contatto</h3><p>'+esc(content.prepare)+'</p></div><p class="detail-conditions">'+esc(s.requisiti)+(content.note?' '+esc(content.note):'')+'</p></section>';
  }else{
   result+='<section class="service-overview"><div class="eyebrow">Il servizio</div><h2>Una soluzione per la tua attività</h2><p>'+esc(s.descrizione)+'</p><div class="notice">'+esc(s.requisiti)+'</div></section>';
  }
